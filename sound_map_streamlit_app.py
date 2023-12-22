@@ -56,10 +56,10 @@ if show_map:
     tooltip = "Click me!"
     
     for indx in full_data.index:
-        lat1 = full_data["Longitude"][indx]
-        lon1 = full_data["Latitude"][indx]
+        lon1 = full_data["Longitude"][indx]
+        lat1 = full_data["Latitude"][indx]
         message = makeMessage(full_data, indx)
-        folium.Marker([lat1,lon1], popup=message, tooltip=tooltip).add_to(m)
+        folium.Marker([lon1,lat1], popup=message, tooltip=tooltip).add_to(m)
     
         folium_static(m)
 
@@ -85,7 +85,7 @@ if show_map3:
     for indx in dataset.index:
         lon3 = dataset["longitude"][indx]
         lat3 = dataset["latitude"][indx]
-        marker = folium.Marker(location=[lat3, lon3], 
+        marker = folium.Marker(location=[lon3, lat3], 
                        tooltip=tooltip, 
                        popup=_makeMessage(dataset, indx))
         marker.add_to(m)
