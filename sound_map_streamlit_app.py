@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import folium
 from streamlit_folium import folium_static
+import plotly.express as px
 
 
 # get the data:
@@ -54,7 +55,7 @@ if show_map:
     m = folium.Map(location=[40.012831, -75.30926273234793],zoom_start=13)
     tooltip = "Click me!"
     
-    for indx in df2.index:
+    for indx in full_data.index:
         lon = full_data["Longitude"][indx]
         lat = full_data["Latitude"][indx]
         message = makeMessage(full_data, indx)
