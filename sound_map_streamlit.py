@@ -7,10 +7,10 @@ from streamlit_folium import folium_static
 
 # get the data:
 
-dataset = pd.read_csv('https://raw.githubusercontent.com/RichardFreedman/Encoding_Music/main/06_SoundMap/query-result.csv')
+dataset = pd.read_csv('https://github.com/lzsheppard/Bico_Sound_Map/blob/main/query-result.csv', delimiter='\t')
 
 # Example assuming the file is in the same directory as the notebook
-full_data = pd.read_csv('https://raw.githubusercontent.com/RichardFreedman/Encoding_Music/main/06_SoundMap/bicomap.csv')
+full_data = pd.read_csv('https://github.com/lzsheppard/Bico_Sound_Map/blob/main/Bi-Co%20Sound%20Map%20Locations.csv', delimiter='\t')
 
 
 # helper function to create popup data
@@ -41,8 +41,9 @@ def _makeMessage_2(df, indx):
 
 # this is the map, with pins for each row of the dataset
 #Used this post for help with tooltip formatting https://stackoverflow.com/questions/65524514/how-can-we-get-tooltips-and-popups-to-show-in-folium
-st.header('This is a header')
-st.markdown('This is some introductory text.')
+st.header('Bi-Co Sound Survey Computational Essay')
+st.markdown('By Logan Griffin, Luke Sheppard, Reed Solomon, and Jade Yu')
+st.markdown('Sounds of Silence: A Sound Survey of the Bi-Co During Finals Week')
 
 
 
@@ -54,8 +55,8 @@ if show_map:
     tooltip = "Click me!"
 
     for indx in full_data.index:
-        lon = full_data["Longitude"][indx]
-        lat = full_data["Latitude"][indx]
+        lat = full_data["Longitude"][indx]
+        lon = full_data["Latitude"][indx]
         marker = folium.Marker(location=[lat, lon], 
                                 tooltip=tooltip, 
                                 popup=_makeMessage_2(full_data, indx))
