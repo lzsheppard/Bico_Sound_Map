@@ -70,7 +70,6 @@ if show_map2:
     fig = px.scatter_mapbox(full_data,
                         lat='Longitude',
                         lon='Latitude',
-                        hover_name="Sound",
                         color = "Campus",
                         zoom=13)
     fig.show()
