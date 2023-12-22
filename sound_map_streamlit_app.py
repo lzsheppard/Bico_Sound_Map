@@ -1,9 +1,7 @@
 import streamlit as st
 import pandas as pd
 import folium
-import streamlit_folium
 from streamlit_folium import folium_static
-import plotly.express as px
 
 
 # get the data:
