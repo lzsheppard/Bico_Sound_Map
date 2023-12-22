@@ -2,7 +2,10 @@ import streamlit as st
 import pandas as pd
 import folium
 from streamlit_folium import folium_static
+<<<<<<< Updated upstream
 pip install plotly
+=======
+>>>>>>> Stashed changes
 import plotly.express as px
 
 
