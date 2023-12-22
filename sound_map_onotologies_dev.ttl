@@ -1,0 +1,217 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix : <https://www.bico-sound-map-2.edu/>
+
+:thing
+    rdfs:label "Thing super class"^^xsd:string.
+
+:person
+    rdfs:subClassOf :thing;
+    rdfs:label "Person"^^xsd:string.
+
+:sound_event
+    rdfs:subClassOf :thing;
+    rdfs:label "Sound recording"^^xsd:string.
+
+:location
+    rdfs:subClassOf :thing;
+    rdfs:label "Location"^^xsd:string .
+
+:campus
+    rdfs:subClassOf :location;
+    rdfs:label "Campus whether Byrn Mawr or Haverford"^^xsd:string.
+
+:building
+    rdfs:subClassOf :thing;
+    rdfs:label "A building"^^xsd:string.
+
+:outdoor_location
+    rdfs:subClassOf :thing;
+    rdfs:label "Location outside"^^xsd:string.
+
+:date 
+    rdfs:subClassOf :thing;
+    rdfs:label "Date"^^xsd:string.
+
+:recording_event 
+    rdfs:subClassOf :thing;
+    rdfs:label "The recording of sound event"^^xsd:string.
+
+:recording_device
+    rdfs:subClassOf :thing;
+    rdfs:label "The device used to record"^^xsd:string.
+
+:time 
+    rdfs:subClassOf :thing;
+    rdfs:label "Time"^^xsd:string.
+    
+:sound_datata
+    rdfs:subClassOf :thing;
+    rdfs:label "Metadata for corresponding recording event"^^xsd:string. 
+
+:sound_type
+    rdfs:subClassOf :thing;
+    rdfs:label "Characteristic for describing the sound of the sound event"^^xsd:string.
+
+
+## ---------- the following classes are not being used at the moment
+:Music_Artist 
+    rdfs:subClassOf :musical_metadata;
+    rdfs:label "Music artist"^^xsd:string;
+    rdfs:comment "In the scope of this project, a music artist is either a single artist (person) or a music band (organization)"^^xsd:string .
+
+:Single_Music_Artist 
+    rdfs:subClassOf :Music_Artist, :Person;
+    rdfs:label "Single music artist"^^xsd:string;
+    rdfs:comment "A single music artist is a music artist that is a person"^^xsd:string .
+
+:Music_Band 
+    rdfs:subClassOf :Music_Artist, :Organization;
+    rdfs:label "Music band"^^xsd:string;
+    rdfs:comment "A music band is a music artist that is an organization"^^xsd:string .
+
+:Music_Track 
+    rdfs:subClassOf :musical_metadata;
+    rdfs:label "Music track"^^xsd:string; 
+    rdfs:label "Song"^^xsd:string .
+
+:event_feature
+    rdfs:subClassOf :sound_metadata, :musical_metadata;
+    rdfs:comment "Super class of scalar music features"^^xsd:string .
+
+## Declaration of Relations
+# Relations relevant for sound_event and music_event
+
+:took_place_in_campus
+    rdfs:domain :sound_event;
+    rdfs:range :campus;
+    rdfs:label "Campus where sound event occured"^^xsd:string.
+
+:took_place_in
+    rdfs:domain :sound_event;
+    rdfs:range :building, :outdoor_location;
+    rdfs:label "Building or outdoor location where sound event took place"^^xsd:string.
+
+:hasdescription
+    rdfs:domain :thing; 
+    rdfs:range rdfs:Literal.
+
+:hasdate
+    rdfs:domain :sound_event, :recording_event;
+    rdfs:range rdfs:Literal;
+    rdfs:label "Date"^^xsd:date.
+
+:recorded
+    rdfs:domain :recording_event;
+    rdfs:range :sound_event;
+    rdfs:label "The action of a recording_event recording a sound_event"^^xsd:string.
+
+:performed_by
+    rdfs:domain :recording_event;
+    rdfs:range :person;
+    rdfs:label "The person who completed the sound recording"^^xsd:string.
+
+:recorded_on
+    rdfs:domain :recording_event;
+    rdfs:range :recorder_device.
+
+:time_recorded_at 
+    rdfs:domain :recording_event;
+    rdfs:range rdfs:Literal.
+
+:has_latitude
+    rdfs:domain :building, :outdoor_location;
+    rdfs:range rdfs:Literal.
+
+:measured_by
+    rdfs:domain :sound_data;
+    rdfs:range :person;
+    rdfs:label "The person who measured sound data"^^xsd:string.
+
+:has_sound_type
+    rdfs:domain :sound_data;
+    rdfs:range :sound_type.
+
+:has_volume
+    rdfs:domain :sound_data; 
+    rdfs:range rdfs:Literal.
+
+:has_pitch 
+    rdfs:domain :sound_data; 
+    rdfs:range rdfs:Literal.
+
+:has_distractability 
+    rdfs:domain :sound_data; 
+    rdfs:range rdfs:Literal.
+
+:has_rowdiness 
+    rdfs:domain :sound_data; 
+    rdfs:range rdfs:Literal.
+
+:has_multiplicity 
+    rdfs:domain :sound_data; 
+    rdfs:range rdfs:Literal.
+
+:has_repetition 
+    rdfs:domain :sound_data; 
+    rdfs:range rdfs:Literal.
+
+:has_persistence 
+    rdfs:domain :sound_data; 
+    rdfs:range rdfs:Literal.
+
+
+        
+
+
+
+
+
+
+
+
+
+:recordedby
+    rdfs:domain :sound_metadata;
+    rdfs:range :Person;
+    rdfs:label "Recorded by"^^xsd:string.
+
+:timerecordedat
+    rdfs:domain :sound_metadata;
+    rdfs:range :time;
+    rdfs:label "Time of Recording"^^xsd:string.
+
+:campus_recorded_at
+    rdfs:domain :sound_metadata;
+    rdfs:range :Campus;
+    rdfs:label "Campus Recorded at"^^xsd:string .
+
+:hasdate
+    rdfs:domain :sound_metadata;
+    rdfs:range :Date;
+    rdfs:label "Date"^^xsd:string .
+
+:hasdescription
+    rdfs:domain :sound_metadata; 
+    rdfs:range :qualitative_description;
+    rdfs:label "Qualitative Description"^^xsd:string .
+
+:recordedon
+    rdfs:domain :sound_metadata; 
+    rdfs:range :recorder_device;
+    rdfs:label "Device Recorded on"^^xsd:string .
+
+:sound_metadata
+    rdfs:subClassOf :Thing, :sound_event;
+    rdfs:label "Metadata of Sound Event"^^xsd:string; 
+    skos:altLabel "Metadata for Sound Recordings"^^xsd:string .
+
+:musical_metadata
+    rdfs:subClassOf :Thing, :sound_event;
+    rdfs:label "Metadata for Musical Events"^^xsd:string .
+
+:organization
+    rdfs:subClassOf :thing;
+    rdfs:label "Collection of Multiple People"^^xsd:string .

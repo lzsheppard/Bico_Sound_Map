@@ -1,0 +1,285 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix : <https://www.encoding-freedman-course.edu/>.
+
+@prefix : <https://www.encoding-freedman-course.edu/>.
+## new URI for project name 
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix : <https://www.bico-sound-map-2.edu/>
+
+##defining class taxonomy
+
+:thing
+    rdfs:label "Thing super class"^^xsd:string.
+
+:person
+    rdfs:subClassOf :thing;
+    rdfs:label "Person"^^xsd:string.
+
+:sound_event
+    rdfs:subClassOf :thing;
+    rdfs:label "Sound recording"^^xsd:string.
+
+:location
+    rdfs:subClassOf :thing;
+    rdfs:label "Location"^^xsd:string .
+
+:campus
+    rdfs:subClassOf :location;
+    rdfs:label "Campus whether Byrn Mawr or Haverford"^^xsd:string.
+
+:building
+    rdfs:subClassOf :thing;
+    rdfs:label "A building"^^xsd:string.
+
+:outdoor_location
+    rdfs:subClassOf :thing;
+    rdfs:label "Location outside"^^xsd:string.
+
+:date 
+    rdfs:subClassOf :thing;
+    rdfs:label "Date"^^xsd:string.
+
+:recording_event 
+    rdfs:subClassOf :thing;
+    rdfs:label "The recording of sound event"^^xsd:string.
+
+:recording_device
+    rdfs:subClassOf :thing;
+    rdfs:label "The device used to record"^^xsd:string.
+
+:time 
+    rdfs:subClassOf :thing;
+    rdfs:label "Time"^^xsd:string.
+    
+:sound_datata
+    rdfs:subClassOf :thing;
+    rdfs:label "Metadata for corresponding recording event"^^xsd:string. 
+
+:sound_type
+    rdfs:subClassOf :thing;
+    rdfs:label "Characteristic for describing the sound of the sound event"^^xsd:string.
+
+:recorder_device
+    rdfs:subClassOf :thing;
+    rdfs:label "Which device was used for recording"^^xsd:string.
+
+
+##defining relations
+
+:took_place_in_campus
+    rdfs:domain :sound_event;
+    rdfs:range :campus;
+    rdfs:label "Campus where sound event occured"^^xsd:string.
+
+:took_place_in
+    rdfs:domain :sound_event;
+    rdfs:range :building, :outdoor_location;
+    rdfs:label "Building or outdoor location where sound event took place"^^xsd:string.
+
+:hasdescription
+    rdfs:domain :thing; 
+    rdfs:range rdfs:Literal.
+
+:hasdate
+    rdfs:domain :sound_event, :recording_event;
+    rdfs:range rdfs:Literal;
+    rdfs:label "Date"^^xsd:date.
+
+:recorded
+    rdfs:domain :recording_event;
+    rdfs:range :sound_event;
+    rdfs:label "The action of a recording_event recording a sound_event"^^xsd:string.
+
+:performed_by
+    rdfs:domain :recording_event;
+    rdfs:range :person;
+    rdfs:label "The person who completed the sound recording"^^xsd:string.
+
+:recorded_on
+    rdfs:domain :recording_event;
+    rdfs:range :recorder_device.
+
+:time_recorded_at 
+    rdfs:domain :recording_event;
+    rdfs:range rdfs:Literal.
+
+:has_latitude
+    rdfs:domain :building, :outdoor_location;
+    rdfs:range rdfs:Literal.
+
+:has_longitude
+    rdfs:domain :building, :outdoor_location;
+    rdfs:range rdfs:Literal.
+
+:measured_by
+    rdfs:domain :sound_data;
+    rdfs:range :person;
+    rdfs:label "The person who measured sound data"^^xsd:string.
+
+:has_sound_type
+    rdfs:domain :sound_data;
+    rdfs:range :sound_type.
+
+:has_volume
+    rdfs:domain :sound_data; 
+    rdfs:range rdfs:Literal.
+
+:has_pitch 
+    rdfs:domain :sound_data; 
+    rdfs:range rdfs:Literal.
+
+:has_distractability 
+    rdfs:domain :sound_data; 
+    rdfs:range rdfs:Literal.
+
+:has_rowdiness 
+    rdfs:domain :sound_data; 
+    rdfs:range rdfs:Literal.
+
+:has_multiplicity 
+    rdfs:domain :sound_data; 
+    rdfs:range rdfs:Literal.
+
+:has_repetition 
+    rdfs:domain :sound_data; 
+    rdfs:range rdfs:Literal.
+
+:has_persistence 
+    rdfs:domain :sound_data; 
+    rdfs:range rdfs:Literal.
+
+
+:R1
+    rdfs:label "Recording of Founders"^^xsd:string;
+    :recordedby "Luke"^^xsd:string;
+    :timerecordedat "21:00"^^xsd:string;
+    :campus_recorded_at "Haverford"^^xsd:string;
+    :hascoordinates [
+        :latitude "40.0098095"^^xsd:string;
+        :longitude "-75.3072503"^^xsd:string
+    ];
+    :hasdate "2023-12-12"^^xsd:date;
+    :hasdescription "Students singing inside founders"^^xsd:string;
+    :recordedon "Iphone Voice Memo"^^xsd:string;
+    a :sound_event.
+
+:R2
+    rdfs:label "Batten House Concert"^^xsd:string;
+    :recordedby "Luke"^^xsd:string;
+    :timerecordedat "22:30"^^xsd:string;
+    :campus_recorded_at "Bryn Mawr"^^xsd:string;
+    :hascoordinates [
+        :latitude "40.03187838"^^xsd:string;
+        :longitude "-75.3172133"^^xsd:string
+    ];
+    :hasdate "2023-12-01"^^xsd:date;
+    :hasdescription "FUCS Concert"^^xsd:string;
+    :recordedon "Iphone Voice Memo"^^xsd:string;
+    a :sound_event.
+
+# Dev new formula for recording data
+#R1 
+
+:R1 a :sound_event;
+:took_place_in_campus :Haverford;
+:took_place_in :building1;
+:has_description "Student Organizers Singing in Founders"^^xsd:string;
+:hasdate "2023-12-12"^^xsd:date. 
+
+:R1_recording a :Recording_Event;
+:recorded :R1; 
+:performed_by :Luke;
+:recorded_on :IphoneVoiceMemo;
+:timerecordedin :evening;
+:timerecordedat "21:00:00"^^xsd:time;
+:hasdate "2023-12-12"^^xsd:date.
+
+:building1 a :buildin;
+:included_in :Haverford;
+:has_description "Founders Hall"^^xsd:string;
+:has_latitude "40.0098095"^^xsd:decimal;
+:has_longitude "-75.3072503"^^xsd:decimal.
+
+## Chatgpt fixes to above ^
+
+:R1 a :sound_event;
+:took_place_in_campus :Haverford;
+:took_place_in :building1;
+:has_description "Student Organizers Singing in Founders"^^xsd:string;
+:hasdate "2023-12-12"^^xsd:date. 
+
+:R1_recording a :recording_event; 
+:recorded :R1; 
+:performed_by :Luke;
+:recorded_on :IphoneVoiceMemo;
+:timerecordedin :evening;
+:timerecordedat "21:00:00"^^xsd:time;
+:hasdate "2023-12-12"^^xsd:date.
+
+:building1 a :building;
+:included_in :Haverford;
+:has_description "Founders Hall"^^xsd:string;
+:has_latitude "40.0098095"^^xsd:decimal;
+:has_longitude "-75.3072503"^^xsd:decimal.
+
+
+
+# R2 examples for improving the project #
+## R2 
+
+:R2 a :sound_Event;
+:took_place_in_campus :BrynMawr;
+:took_place_in :building2;
+:has_description "FUCS Concert"^^xsd:string;
+:has_date "2023-12-01"^^xsd:date.
+
+:R2_recording a :Recording_Event;
+:recorded :R2;
+:performed_by :Luke;
+:recorded_on :IphoneVoiceMemo;
+:timerecordedin :evening;
+:timerecordedat "22:30:00"^^xsd:time;
+:has_date "2023-12-01"^^xsd:date. 
+
+:building2 a :Building; 
+:included_in :BrynMawr;
+:has_description "Batten House"^^xsd:string;
+:has_latitude "40.03187838"^^xsd:decimal;
+:has_longitude "-75.3172133"^^xsd:decimal.
+
+:IphoneVoiceMemo a :recorder_device;
+:has_description "Iphone Voice Memo"^^xsd:string. 
+
+:Luke a :Person.
+
+:Haverford a :campus;
+:has_description "Haverford College Campus"^^xsd:string. 
+
+:BrynMawr a :campus;
+:has_description "Bryn Mawr College Campus"^^xsd:string. 
+
+
+
+
+
+
+
+# give me recordings that took place at :BrynMawr at a certain date
+select * where {
+?event a :Recording_Event; :recorded ?sound_event.
+?sound_event a :Sound_Event; :campus_recorded_at :BrynMawr; :has_date ?date.
+}
+​
+# give me recordings that took place at :BrynMawr at a certain date and give coordinates
+select * where {
+?event a :Recording_Event; :recorded ?sound_event.
+?sound_event a :Sound_Event; :took_place_in ?place.
+?place :has_latitude ?lat; :has_longitude ?long.
+}
