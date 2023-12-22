@@ -56,10 +56,10 @@ if show_map:
     tooltip = "Click me!"
     
     for indx in full_data.index:
-        lon = full_data["Longitude"][indx]
-        lat = full_data["Latitude"][indx]
+        lat = full_data["Longitude"][indx]
+        lon = full_data["Latitude"][indx]
         message = makeMessage(full_data, indx)
-        folium.Marker([lon,lat], popup=message, tooltip=tooltip).add_to(m)
+        folium.Marker([lat,lon], popup=message, tooltip=tooltip).add_to(m)
     
         folium_static(m)
 
@@ -68,10 +68,10 @@ show_map2 = st.sidebar.checkbox('Show Map of Sound Events', value=False)
 if show_map2:
 
     fig = px.scatter_mapbox(full_data,
-                        lat='latitude',
-                        lon='longitude',
-                        hover_name="description",
-                        color = "location",
+                        lat='Longitude',
+                        lon='Latitude',
+                        hover_name="Sound",
+                        color = "Campus",
                         zoom=13)
     fig.show()
 
