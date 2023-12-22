@@ -9,7 +9,7 @@ from streamlit_folium import folium_static
 dataset = pd.read_csv('https://github.com/lzsheppard/Bico_Sound_Map/blob/main/query-result.csv', delimiter='\t')
 
 # Example assuming the file is in the same directory as the notebook
-full_data = pd.read_csv('https://github.com/lzsheppard/Bico_Sound_Map/blob/main/Bi-Co%20Sound%20Map%20Locations.csv')
+full_data = pd.read_csv('https://github.com/lzsheppard/Bico_Sound_Map/blob/main/Bi-Co%20Sound%20Map%20Locations.csv', delimiter='\t')
 
 
 # helper function to create popup data
